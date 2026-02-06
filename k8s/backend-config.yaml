@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: todo-app
+  labels:
+    app: todo
+    tier: backend
+data:
+  SPRING_PROFILES_ACTIVE: "final"
+  SPRING_DATASOURCE_URL: "jdbc:mysql://mysql.todo-app.svc.cluster.local:3306/todoDB?createDatabaseIfNotExist=true"

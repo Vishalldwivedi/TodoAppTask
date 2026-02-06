@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: todo
+    tier: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo
+      tier: database
+  template:
+    metadata:
+      labels:
+        app: todo
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8
+        ports:
+      - containerPort: 3306
+      envFrom:
+      - secretRef:
+          name: mysql-secret
+      volumeMounts:
+      - mountPath: /var/lib/mysql
+        name: mysql-data
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "256Mi"
+        limits:
+          cpu: "500m"
+          memory: "512Mi"
+    volumes:
+    - name: mysql-data
+      persistentVolumeClaim:
+        claimName: mysql-pvc
