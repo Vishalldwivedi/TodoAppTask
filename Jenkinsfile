@@ -16,7 +16,7 @@ pipeline {
 
         stage('Checkout App Repo') {
             script{
-                    code_checkout("https://github.com/Vishalldwivedi/tooodoapp","main")
+                    code_checkout("https://github.com/Vishalldwivedi/TodoAppTask/tree/main","main")
                 }
         }
 
@@ -39,7 +39,7 @@ pipeline {
         stage("SonarQube: Code Analysis"){
             steps{
                 script{
-                    sonarqube_analysis("Sonar","wanderlust","wanderlust")
+                    sonarqube_analysis("Sonar","todoapp","todoapp")
                 }
             }
         }
